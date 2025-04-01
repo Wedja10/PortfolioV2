@@ -62,17 +62,18 @@ body {
 .image-presentation::before {
     content: '';
     position: absolute;
-    bottom: 25px; /* Ajuste le décalage vertical */
+    bottom: 30%; /* Ajuste le décalage vertical */
     right: 25px; /* Ajuste le décalage horizontal */
     width: 100%;
-    height: 100%;
+    height: 73.5%;
     background-color: var(--secondary-color);
     z-index: 0; /* Place le fond derrière l'image */
     transition: all 0.3s ease;
+
 }
 
 .image-presentation:hover::before {
-    bottom: 35px; /* Augmente le décalage au survol */
+    bottom: 32%; /* Augmente le décalage au survol */
     right: 35px; /* Augmente le décalage au survol */
 }
 
