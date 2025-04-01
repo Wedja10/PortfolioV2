@@ -1,0 +1,226 @@
+:root {
+    --main-color: #0B1320;
+    --secondary-color: #E7C639;
+    --tertiary-color: #FFF;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-color);
+    font-family: 'Gobold CUTS', sans-serif;
+    color: var(--tertiary-color);
+}
+
+.container-competences {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 7%; /* Ajoute un espace en haut pour éviter que le contenu passe sous le header */
+}
+
+.competences-title {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.competences-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+/* Le reste du CSS reste inchangé */
+
+.competences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.competence-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(231, 198, 57, 0.3);
+    padding: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.competence-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--secondary-color);
+}
+
+.competence-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.competence-card:hover::before {
+    width: 10px;
+}
+
+.competence-number {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.competence-title {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+}
+
+.competence-subtitle {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.competence-detail {
+    display: none;
+    opacity: 0;
+    padding: 30px;
+    margin-bottom: 50px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    border-left: 5px solid var(--secondary-color);
+    transition: all 0.5s ease;
+}
+
+.competence-detail.active {
+    display: block;
+    opacity: 1;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.detail-number {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.detail-title {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+}
+
+.detail-content {
+    margin-bottom: 30px;
+}
+
+.detail-content h3 {
+    color: var(--secondary-color);
+    margin-top: 25px;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.detail-content h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+}
+
+.project-related {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(231, 198, 57, 0.3);
+}
+
+.project-card {
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.project-title {
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.project-desc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.self-evaluation {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: rgba(231, 198, 57, 0.1);
+    border-radius: 5px;
+}
+
+.self-evaluation h4 {
+    color: var(--secondary-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #d4b633;
+    transform: translateY(-2px);
+}
+
+.competence-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+}

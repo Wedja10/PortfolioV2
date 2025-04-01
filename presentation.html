@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Présentation</title>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/presentation.css">
     <link rel="icon" type="image/png" href="assets/logo_web.png" sizes="32x32">
+    <!-- Ajout de la police Gobold ou d'une alternative si Gobold n'est pas disponible -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>
     <nav>
         <ul>
             <li><a href="index.html">ACCUEIL</a></li>
-            <li><a href="presentation.html">PRÉSENTATION</a></li>
+            <li><a href="presentation.html" class="active">PRÉSENTATION</a></li>
             <li><a href="competences.html">COMPÉTENCES</a></li>
             <li><a href="#">CONTACT</a></li>
         </ul>
@@ -22,16 +25,19 @@
 
 <main class="container-presentation">
     <div class="image-presentation">
-        <img src="assets/presentation/jawed.jpg" alt="jawed ESSAHLI">
+        <img src="assets/presentation/jawed.jpg" alt="Jawed ESSAHLI">
     </div>
     <div class="text-presentation">
         <div class="title-presentation">
             <h1>Qui je suis ?</h1>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc id ultrices tristique. In ex sem, venenatis ac malesuada sed, congue vitae magna.<br><br>
-            Aenean felis erat, maximus ac diam vitae, finibus aliquam diam. Quisque et arcu eleifend, mattis metus eget, venenatis dui. Cras bibendum, risus convallis convallis eleifend, lorem arcu ullamcorper erat,<br><br>
-            vitae aliquet tortor ligula id sapien. Proin condimentum placerat purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc id ultrices tristique. In ex sem, venenatis ac malesuada sed, congue vitae magna. Aenean felis erat, maximus ac diam vitae, finibus aliquam diam. Quisque et arcu eleifend,<br><br>
-            mattis metus eget, venenatis dui. Cras bibendum, risus convallis convallis eleifend,</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc id ultrices tristique. In ex sem, venenatis ac malesuada sed, congue vitae magna.</p>
+
+        <p>Aenean felis erat, maximus ac diam vitae, finibus aliquam diam. Quisque et arcu eleifend, mattis metus eget, venenatis dui. Cras bibendum, risus convallis convallis eleifend, lorem arcu ullamcorper erat.</p>
+
+        <p>Vitae aliquet tortor ligula id sapien. Proin condimentum placerat purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc id ultrices tristique. In ex sem, venenatis ac malesuada sed, congue vitae magna.</p>
+
+        <p>Aenean felis erat, maximus ac diam vitae, finibus aliquam diam. Quisque et arcu eleifend, mattis metus eget, venenatis dui. Cras bibendum, risus convallis convallis eleifend.</p>
     </div>
 </main>
 
@@ -47,12 +53,12 @@
             </ul>
         </nav>
         <div class="footer-contact">
-            <a href="https://www.linkedin.com/in/jawed-essahli/"><img id="linkedin" src="assets/footer/linkedin.png" alt="linkedin link"></a>
-            <a href="https://github.com/Wedja10"><img id="github" src="assets/footer/github.png" alt="github link"></a>
+            <a href="https://www.linkedin.com/in/jawed-essahli/" aria-label="LinkedIn"><img id="linkedin" src="assets/footer/linkedin.png" alt="LinkedIn"></a>
+            <a href="https://github.com/Wedja10" aria-label="GitHub"><img id="github" src="assets/footer/github.png" alt="GitHub"></a>
             <div class="mail-phone">
-                <img src="assets/footer/mail.png" alt="mail">
+                <img src="assets/footer/mail.png" alt="Email">
                 <p>ESSAHLI.JAWED710@GMAIL.COM</p>
-                <img id="phone" src="assets/footer/phone.png" alt="phone number">
+                <img id="phone" src="assets/footer/phone.png" alt="Téléphone">
                 <p>07 49 26 58 89</p>
             </div>
         </div>
