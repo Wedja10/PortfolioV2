@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio - Accueil</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="icon" type="image/png" href="assets/logo_web.png" sizes="32x32">
+
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">ACCUEIL</a></li>
+            <li><a href="presentation.html">PRÉSENTATION</a></li>
+            <li><a href="competences.html">COMPÉTENCES</a></li>
+            <li><a href="#">CONTACT</a></li>
+        </ul>
+    </nav>
+</header>
+
+<script>
+    let currentPage = "competences";
+    let selectedLanguage = "python";
+    let actualProject = "";
+    document.addEventListener('DOMContentLoaded', () => {
+        const competences = document.getElementById('competences');
+        const cv = document.getElementById('cv');
+        const container_comp = document.querySelector('.container_competence');
+        const container_cv = document.querySelector('.container-cv');
+        const decoFooter = document.querySelector('.deco-footer p');
+
+        // Par défaut, 'competences' est sélectionné
+
+        competences.classList.add('selected');
+        container_cv.classList.add("hide-cv");
+
+
+        competences.addEventListener('click', () => {
+            if (!competences.classList.contains('selected')) {
+                competences.classList.add('selected');
+                cv.classList.remove('selected');
+                container_comp.classList.remove("hidden-content");
+                container_cv.classList.add("hide-cv");
+                decoFooter.textContent = "IT";
+            }
+        });
+
+        cv.addEventListener('click', () => {
+            if (!cv.classList.contains('selected')) {
+                cv.classList.add('selected');
+                competences.classList.remove('selected');
+                container_cv.classList.remove("hide-cv");
+                container_comp.classList.add("hidden-content");
+                decoFooter.textContent = "CV";
+            }
+        });
+    });
+
+    function initializeViewMore(pythonDetailsId, numberDetailsSelector, decoFooterSelector, number) {
+        const pythonDetails = document.getElementById(pythonDetailsId);
+        const numberDetails = document.querySelector(numberDetailsSelector);
+        const decoFooter = document.querySelector('.deco-footer p'); // Sélectionnez le texte "IT"
+
+        if (!pythonDetails || !numberDetails || !decoFooter) {
+            console.warn('Un ou plusieurs éléments requis sont manquants.');
+            return;
+        }
+
+        document.querySelectorAll('.competence').forEach(competence => {
+            competence.style.display = 'none';
+        });
+
+        // Afficher le contenu cible
+        pythonDetails.classList.add('visible-content');
+
+        // Rendre visible le number-details
+        numberDetails.classList.add('visible-content');
+
+        // Modifier le texte "IT" en fonction de la compétence
+        decoFooter.textContent = decoFooterSelector;
+
+        // Mettre à jour le numéro de détail
+        numberDetails.textContent = number;
+
+        // Mettre à jour la variable de la page actuelle
+        currentPage = "projets";
+    }
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeButton = document.querySelector('.close-button');
+        const zoomImages = document.querySelectorAll('.project-image img:last-child'); // Sélectionne uniquement l'image de zoom
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        let currentIndex = 0;
+
+        // Fonction pour ouvrir le modal
+        const openModal = (index) => {
+            currentIndex = index;
+            const projectImages = document.querySelectorAll('.project-image img:first-child'); // Toutes les images principales
+            modalImage.src = projectImages[currentIndex].src; // Charge l'image principale dans le modal
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open'); // Ajouter la classe
+        };
+
+        // Fonction pour fermer le modal
+        const closeModal = () => {
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open'); // Retirer la classe
+        };
+
+        // Fonction pour naviguer entre les images
+        const showImage = (index) => {
+            const projectImages = document.querySelectorAll('.project-image img:first-child'); // Toutes les images principales
+            currentIndex = (index + projectImages.length) % projectImages.length;
+            modalImage.src = projectImages[currentIndex].src; // Met à jour l'image dans le modal
+        };
+
+        // Ajout des événements pour ouvrir le modal uniquement sur l'image de zoom
+        zoomImages.forEach((zoomImg, index) => {
+            zoomImg.addEventListener('click', (event) => {
+                event.stopPropagation(); // Empêche tout autre clic d'être déclenché
+                openModal(index);
+            });
+        });
+
+        closeButton.addEventListener('click', closeModal);
+
+        prevButton.addEventListener('click', () => showImage(currentIndex - 1));
+        nextButton.addEventListener('click', () => showImage(currentIndex + 1));
+
+        // Fermer le modal en cliquant à l'extérieur de l'image
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+    });
+
+    function setDetailProject() {
+        console.log("Initialisation du script...");
+
+        // Sélectionnez tous les éléments cliquables de projet
+        const projectElements = document.querySelectorAll('.project-image');
+
+        if (projectElements.length === 0) {
+            console.error("Aucun élément avec la classe 'info-project' trouvé !");
+            return;
+        }
+
+        projectElements.forEach((element) => {
+            element.addEventListener('click', (event) => {
+                const project = element.getAttribute('data-project');
+                console.log(`Projet cliqué : ${project}`);
+                actualProject = project;
+                // Masquer toutes les descriptions
+                document.querySelectorAll('.description-project').forEach((el) => {
+                    el.classList.add('hidden-content');
+                    el.classList.remove('visible-content');
+                    console.log(`Masquage de : ${el.getAttribute('data-project')}`);
+                });
+
+                document.querySelectorAll('.project-logo').forEach((image) => {
+                    if(image.getAttribute("data-project") === project){
+                        image.classList.add('offset-left');
+                    }
+                });
+
+                // Afficher la description du projet cliqué
+                const detailElement = document.querySelector(`.description-project[data-project="${project}"]`);
+                if (detailElement) {
+                    detailElement.classList.remove('hidden-content');
+                    detailElement.classList.add('visible-content');
+
+                    currentPage = "details";
+                    console.log(`Affichage de : ${project}`);
+                } else {
+                    console.error(`Description introuvable pour le projet : ${project}`);
+                }
+                document.querySelectorAll('.detail-language-logo').forEach((logo) => {
+                    logo.classList.add('hidden-content');
+                    logo.classList.remove('visible-content');
+                });
+
+            });
+        });
+    }
+
+    // Initialisation du script
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("DOM complètement chargé.");
+        setDetailProject();
+    });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const backButton = document.getElementById("back");
+        document.querySelectorAll('.text-arrow').forEach((arrow) => {
+            arrow.addEventListener('click', (event) => {
+                const clickedId = event.currentTarget.id; // Récupère l'ID de l'élément cliqué
+                console.log(`ID de l'élément cliqué : ${clickedId}`);
+                if (clickedId.match('view-more-python')) {
+                    initializeViewMore('python-details', '.number-details', 'PYTHON', '01');
+                    selectedLanguage = "python";
+                } else if (clickedId.match('view-more-java')) {
+                    initializeViewMore('java-details', '.number-details', 'JAVA', '02');
+                    selectedLanguage = "java";
+                } else if (clickedId.match('view-more-c')) {
+                    initializeViewMore('c-details', '.number-details', 'C', '03');
+                    selectedLanguage = "c";
+                } else if (clickedId.match('view-more-web')) {
+                    initializeViewMore('web-details', '.number-details', '</>', '04');
+                    selectedLanguage = "web";
+                }
+                currentPage = "projets";
+                backButton.classList.remove("hidden-content");
+                backButton.classList.add("visible-content");
+                document.querySelectorAll('.detail-language-logo').forEach((logo) => {
+                    logo.classList.remove('hidden-content');
+                    logo.classList.add('visible-content');
+                });
+            });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const backButton = document.getElementById("back");
+        const number = document.querySelector('.number-details');
+        const decoFooter = document.querySelector('.deco-footer p');
+        if (backButton) {
+            backButton.addEventListener("click", function () {
+                console.log("Back button clicked, currentPage:", currentPage); // Debug
+                if (currentPage === "details") {
+                    // Retour à la liste des projets
+                    document.querySelectorAll('.description-project').forEach((descr) => {
+                        if (descr.getAttribute('data-project') === actualProject) {
+                            descr.classList.remove('visible-content');
+                            descr.classList.add('hidden-content');
+                            console.log(`Masquage du projet : ${actualProject}`);
+                        }
+                    });
+                    document.querySelectorAll('.detail-language-logo').forEach((logo) => {
+                        logo.classList.remove('hidden-content');
+                        logo.classList.add('visible-content');
+                    });
+                    document.querySelectorAll('.project-logo').forEach((image) => {
+                        if(image.getAttribute("data-project") === actualProject){
+                            image.classList.remove('offset-left');
+                        }
+                    });
+                    currentPage = "projets";
+                } else if (currentPage === "projets") {
+                    // Retour à la liste des compétences
+                    document.querySelectorAll('.competence').forEach(competence => {
+                        competence.style.display = 'flex';
+                    });
+
+                    // Masquer toutes les sections de projet
+                    document.querySelectorAll('#python-details, #java-details, #c-details, #web-details').forEach(details => {
+                        details.classList.remove("visible-content");
+                        details.classList.add("hidden-content");
+                    });
+
+                    // Masquer le numéro de détail
+                    number.classList.remove("visible-content");
+                    number.classList.add("hidden-content");
+                    backButton.classList.remove("visible-content");
+                    backButton.classList.add("hidden-content");
+                    currentPage = "competences";
+                    decoFooter.textContent = "IT";
+                    console.log("Navigated to competences");
+                } else {
+                    console.log("No action taken");
+                }
+            });
+        } else {
+            console.error("Back button not found in the DOM.");
+        }
+    });
+
+
+</script>
+
+
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <img id="modal-image" src="" alt="Image en gros">
+    </div>
+    <div class="carousel-buttons">
+        <button id="prev-button">&#10094;</button>
+        <button id="next-button">&#10095;</button>
+    </div>
+</div>
+
+
+<main class="container_index">
+    <div class="rectangle"></div>
+    <div class="line-horizontal"></div>
+    <div class="line-diagonal"></div>
+    <div class="name">
+        <h1 id="first-name">JAWED</h1>
+        <h1 id="last-name">ESSAHLI</h1>
+    </div>
+    <img src="assets/jawed_accueil.png" alt="Jawed ESSAHLI">
+</main>
+
+<div class="menu-index">
+    <div class="choice-index">
+        <div id="competences" class="choice-competences">PROJETS</div>
+        <div id="cv" class="choice-cv">CURRICULUM VITAE</div>
+    </div>
+</div>
+
+<div class="container_competence">
+    <div class="competence">
+        <img class="languange" src="assets/index/python.png" alt="Python logo">
+        <div class="text-arrow" id="view-more-python">
+            <span>VOIR PLUS</span>
+            <img src="/assets/index/arrow.png" alt="arrow" class="icon"/>
+        </div>
+        <p class="number">01</p>
+    </div>
+    <div class="competence">
+        <img class="languange" src="assets/index/java.png" alt="Java logo">
+        <div class="text-arrow" id="view-more-java">
+            <span>VOIR PLUS</span>
+            <img src="/assets/index/arrow.png" alt="arrow" class="icon"/>
+        </div>
+        <p class="number">02</p>
+    </div>
+    <div class="competence">
+        <img class="languange" src="assets/index/C.png" alt="C logo">
+        <div class="text-arrow" id="view-more-c">
+        <span>VOIR PLUS</span>
+            <img src="/assets/index/arrow.png" alt="arrow" class="icon" />
+        </div>
+        <p class="number">03</p>
+    </div>
+    <div class="competence">
+        <div class="multiple-languages">
+            <img class="languange" src="assets/index/html.png" alt="Dev web logos">
+            <img class="languange" src="assets/index/css.png" alt="Dev web logos">
+            <img class="languange" src="assets/index/php.png" alt="Dev web logos">
+        </div>
+        <div class="text-arrow" id="view-more-web">
+            <span>VOIR PLUS</span>
+            <img src="/assets/index/arrow.png" alt="arrow" class="icon" />
+        </div>
+        <p class="number">04</p>
+    </div>
+    <img id="back" src="assets/index/details/back.png" class="hidden-content">
+    <div id="python-details" class="hidden-content" >
+        <div id="details-python" class="details" >
+            <img src="assets/index/details/python.png" alt="python logo" class="detail-language-logo hidden-content">
+            <div class="project-image" data-project="qix">
+                <img src="assets/index/details/qix_title.png" alt="qix title" data-project="qix">
+                <img src="assets/index/details/zoom.png" alt="zoom" data-project="qix">
+            </div>
+            <div class="info-project" data-project="qix">
+                <div class="project-logo" data-project="qix">
+                    <img src="assets/index/details/qix_logo.jpg" alt="" data-project="qix">
+                </div>
+                <div class="container-additional-infos" data-project="qix">
+                    <div class="additional-info" data-project="qix">
+                        <p>JEU VIDÉO</p>
+                    </div>
+                    <div class="additional-info" data-project="qix">
+                        <p>PYTHON</p>
+                    </div>
+                </div>
+            </div>
+            <div id="description-project" class="description-project" data-project="qix">
+                <h1><b>PRÉSENTATION</b></h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc id ultrices tristique. In ex sem, venenatis ac malesuada sed, congue vitae magna. Aenean felis erat, maximus ac diam vitae, finibus aliquam diam. Quisque et arcu eleifend, mattis metus eget, venenatis dui. Cras bibendum, risus convallis convallis eleifend, lorem arcu ullamcorper erat, vitae aliquet tortor ligula id sapien. Proin condimentum placerat purus.</p>
+                <h1><b>TECHNOLOGIES</b></h1>
+                <img src="assets/index/details/Technologies/python.png" alt="python logo">
+            </div>
+        </div>
+    </div>
+    <div id="java-details" class="hidden-content">
+        <div id="details-java" class="details">
+            <img src="assets/index/details/java.png" alt="java logo" class="detail-language-logo hidden-content">
+            <div class="project-image" data-project="codex">
+                <img src="assets/index/details/codex.png" alt="codex title" data-project="codex">
+                <img src="assets/index/details/zoom.png" alt="zoom" data-project="codex">
+            </div>
+            <div class="info-project" data-project="codex" >
+                <div class="project-logo" data-project="codex">
+                    <img src="assets/index/details/codex_logo.png" alt="" data-project="codex">
+                </div>
+                <div class="container-additional-infos" data-project="codex">
+                    <div class="additional-info" data-project="codex">
+                        <p>JEU VIDÉO</p>
+                    </div>
+                    <div class="additional-info" data-project="codex">
+                        <p>JAVA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="description-project" data-project="codex">
+                <h1><b>PRÉSENTATION</b></h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc id ultrices tristique. In ex sem, venenatis ac malesuada sed, congue vitae magna. Aenean felis erat, maximus ac diam vitae, finibus aliquam diam. Quisque et arcu eleifend, mattis metus eget, venenatis dui. Cras bibendum, risus convallis convallis eleifend, lorem arcu ullamcorper erat, vitae aliquet tortor ligula id sapien. Proin condimentum placerat purus.</p>
+                <h1><b>TECHNOLOGIES</b></h1>
+                <img src="assets/index/details/Technologies/java.png" alt="java logo">
+            </div>
+        </div>
+    </div>
+    <div id="c-details" class="hidden-content">
+        <div id="details-c" class="details">
+            <img src="assets/index/details/python.png" alt="python logo" class="detail-language-logo">
+            <div class="project-image" data-project="travia-perso">
+                <img src="assets/index/details/qix_title.png" alt="qix title" data-project="travia-perso">
+                <img src="assets/index/details/zoom.png" alt="zoom" data-project="travia-perso">
+            </div>
+            <div class="info-project" data-project="travia-perso">
+                <div class="project-logo" data-project="travia-perso">
+                    <img src="assets/index/details/qix_logo.jpg" alt="" data-project="travia-perso">
+                </div>
+                <div class="container-additional-infos" data-project="travia-perso">
+                    <div class="additional-info" data-project="travia-perso">
+                        <p>SITE WEB</p>
+                    </div>
+                    <div class="additional-info" data-project="travia-perso">
+                        <p>HTML</p>
+                    </div>
+                    <div class="additional-info" data-project="travia-perso">
+                        <p>CSS</p>
+                    </div>
+                    <div class="additional-info" data-project="travia-perso">
+                        <p>PHP</p>
+                    </div>
+                    <div class="additional-info" data-project="travia-perso">
+                        <p>C</p>
+                    </div>
+                    <div class="additional-info" data-project="travia-perso">
+                        <p>JAVA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="description-project" data-project="travia-perso">
+                <h1><b>PRÉSENTATION</b></h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc id ultrices tristique. In ex sem, venenatis ac malesuada sed, congue vitae magna. Aenean felis erat, maximus ac diam vitae, finibus aliquam diam. Quisque et arcu eleifend, mattis metus eget, venenatis dui. Cras bibendum, risus convallis convallis eleifend, lorem arcu ullamcorper erat, vitae aliquet tortor ligula id sapien. Proin condimentum placerat purus.</p>
+                <h1><b>TECHNOLOGIES</b></h1>
+                <img src="assets/index/details/Technologies/python.png" alt="python logo">
+            </div>
+        </div>
+    </div>
+    <div id="web-details" class="hidden-content">
+        <div id="web-python" class="details">
+            <img src="assets/index/details/python.png" alt="python logo" class="detail-language-logo">
+            <div class="project-image">
+                <img src="assets/index/details/qix_title.png" alt="qix title">
+                <img src="assets/index/details/zoom.png" alt="zoom">
+            </div>
+            <div class="info-project">
+                <div class="project-logo">
+                    <img src="assets/index/details/qix_logo.jpg" alt="">
+                </div>
+                <div class="container-additional-infos">
+                    <div class="additional-info">
+                        <p>JEU VIDÉO</p>
+                    </div>
+                    <div class="additional-info">
+                        <p>PYTHON</p>
+                    </div>
+                </div>
+            </div>
+            <div class="description-project">
+                <h1><b>PRÉSENTATION</b></h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales nunc id ultrices tristique. In ex sem, venenatis ac malesuada sed, congue vitae magna. Aenean felis erat, maximus ac diam vitae, finibus aliquam diam. Quisque et arcu eleifend, mattis metus eget, venenatis dui. Cras bibendum, risus convallis convallis eleifend, lorem arcu ullamcorper erat, vitae aliquet tortor ligula id sapien. Proin condimentum placerat purus.</p>
+                <h1><b>TECHNOLOGIES</b></h1>
+                <img src="assets/index/details/Technologies/python.png" alt="python logo">
+            </div>
+        </div>
+    </div>
+
+
+    <p class="number-details">01</p>
+</div>
+
+<div class="container-cv">
+    <div class="sections">
+        <div class="section-cv">
+            <div class="titre-cv">
+                <div class="point-cv"></div>
+                <h1>programmation</h1>
+            </div>
+            <div class="language">
+                <p><span class="highlight-text">HTML</span> : niveau intermédiaire</p>
+                <p><span class="highlight-text">CSS</span> : niveau intermédiaire</p>
+                <p><span class="highlight-text">PHP</span> : niveau intermédiaire</p>
+                <p><span class="highlight-text">Java</span> : niveau débutant</p>
+                <p><span class="highlight-text">Python</span> : niveau intermédiaire</p>
+                <p><span class="highlight-text">C</span> : niveau débutant</p>
+                <p><span class="highlight-text">mySQL</span> : niveau intermédiaire</p>
+                <p><span class="highlight-text">Postgresql</span> : niveau débutant</p>
+            </div>
+        </div>
+
+        <div class="section-cv">
+            <div class="titre-cv">
+                <div class="point-cv"></div>
+                <h1>expérience</h1>
+            </div>
+            <div class="exp">
+                <p>Pas encore d'expérience</p>
+            </div>
+        </div>
+
+        <div class="section-cv">
+            <div class="titre-cv">
+                <div class="point-cv"></div>
+                <h1>HOBBIES</h1>
+            </div>
+            <div class="hobbies">
+                <div class="hobbie">
+                    <img src="assets/index/cv/video-game.png" alt="favorite video games">
+                    <p>RDR II</p>
+                </div>
+                <div class="hobbie">
+                    <img src="assets/index/cv/sport.png" alt="favorite sport">
+                    <p>football</p>
+                </div>
+                <div class="hobbie">
+                    <img src="assets/index/cv/book.png" alt="favorite book">
+                    <p>voyage au centre de la terre</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-cv">
+            <div class="titre-cv">
+                <div class="point-cv"></div>
+                <h1>langues</h1>
+            </div>
+            <div class="languages">
+                <p><span class="highlight-text">ANGLAIS</span> : B2+</p>
+                <p><span class="highlight-text">ESPAGNOL</span> : B1+</p>
+            </div>
+        </div>
+
+        <div class="section-cv offset-left-formation">
+            <div class="titre-cv">
+                <div class="point-cv"></div>
+                <h1>formations</h1>
+            </div>
+            <div class="formations-details">
+                <p><span class="highlight-text">but informatique - iut de champs-sur-marne </span><br>
+                    parcours réalisation d'applications : conception, développement, validation</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="download-cv">
+        <a href="assets/index/cv/CV%20%20Développeur%20informatique%20stage.pdf" download="CV Développeur informatique stage.pdf">
+            <p>télécharger mon cv</p>
+        </a>
+    </div>
+
+</div>
+
+<footer>
+    <div class="deco-footer">
+        <p>IT</p>
+    </div>
+    <div class="main-footer">
+        <img id="logo" src="assets/footer/logo.png" alt="Logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">ACCUEIL</a></li>
+                <li><a href="presentation.html">PRÉSENTATION</a></li>
+                <li><a href="competences.html">COMPÉTENCES</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="footer-contact">
+            <a href="https://www.linkedin.com/in/jawed-essahli/"><img id="linkedin" src="assets/footer/linkedin.png" alt="linkedin link"></a>
+            <a href="https://github.com/Wedja10"><img id="github" src="assets/footer/github.png" alt="github link"></a>
+            <div class="mail-phone">
+                <img src="assets/footer/mail.png" alt="mail">
+                <p>ESSAHLI.JAWED710@GMAIL.COM</p>
+                <img id="phone" src="assets/footer/phone.png" alt="phone number">
+                <p>07 49 26 58 89</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

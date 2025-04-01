@@ -1,0 +1,123 @@
+:root {
+    --main-color: #0B1320;
+    --secondary-color: #E7C639;
+    --tertiary-color: #FFF;
+}
+
+.deco-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    font-family: Gobold Hollow, sans-serif;
+}
+
+.deco-footer p{
+    font-size: 16rem;
+    margin: 0;
+}
+
+.main-footer{
+    background-color: var(--main-color);
+    width: 100%;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo{
+    padding-left: 4.5%;
+    padding-top: 2.2%;
+    padding-bottom: 2.2%;
+}
+
+.footer-contact{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: var(--tertiary-color);
+    font-family: Gobold Thin, sans-serif;
+    right: 2%;
+    bottom: 4%;
+    position: absolute;
+    gap: 1.5rem;
+}
+
+
+
+.mail-phone{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-left: 5.5%;
+}
+
+.mail-phone p{
+    border-right: 2px solid white;
+    margin: 0;
+    margin-right: 20px;
+    padding-right: 5%;
+    white-space: nowrap;
+}
+
+.mail-phone p:last-child{
+    border-right: none;
+}
+
+.mail-phone img:first-child{
+    padding-top: 4%;
+}
+
+.mail-phone img{
+    margin-right: 1.7%;
+}
+
+#phone {
+    width: 9%;
+}
+
+footer nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 45%;
+    left: 33%;
+    font-family: Gobold CUTS, sans-serif;
+    position: absolute;
+}
+
+footer nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 3%;
+}
+
+footer nav ul li {
+    margin: 0 20px;
+    font-size: 1.5rem;
+    color: white;
+    position: relative;
+    padding-right: 37px;
+    border-right: 2px solid white;
+}
+
+footer nav ul li:last-child {
+    border-right: none; /* Supprime la ligne après le dernier élément */
+}
+
+footer nav ul li a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.5s ease;
+}
+
+footer nav ul li a:hover {
+    color: var(--secondary-color); /* Changement de couleur au survol */
+}

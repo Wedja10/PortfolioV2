@@ -1,0 +1,50 @@
+header {
+    width: 100%;
+    padding: 2.5% 0;
+    background: linear-gradient(to bottom, #0B1320 20%, transparent 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Fixe le header en haut de la page */
+    top: 0;
+    left: 0;
+    z-index: 10;
+    font-family: Gobold CUTS, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding-top: 7rem; /* Ajoutez un espace pour compenser la hauteur du header */
+}
+
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 3%;
+}
+
+header nav ul li {
+    margin: 0 20px;
+    font-size: 1.5rem;
+    color: white;
+    position: relative;
+    padding-right: 37px;
+    border-right: 2px solid white;
+}
+
+header nav ul li:last-child {
+    border-right: none; /* Supprime la ligne après le dernier élément */
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.5s ease;
+}
+
+header nav ul li a:hover {
+    color: var(--secondary-color); /* Changement de couleur au survol */
+}

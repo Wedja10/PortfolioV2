@@ -1,0 +1,74 @@
+:root {
+    --main-color: #0B1320;
+    --secondary-color: #E7C639;
+    --tertiary-color: #FFF;
+}
+
+body {
+    background-color: var(--main-color);
+}
+
+.container-presentation{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 5% 0 5% 0;
+    gap: 7rem;
+}
+
+.text-presentation{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 40%;
+    padding-top: 3%;
+}
+
+.title-presentation{
+    background-color: var(--secondary-color);
+    color: var(--tertiary-color);
+    font-family: Gobold, sans-serif;
+    font-size: 2.5rem;
+    margin: 0;
+    height: 8%;
+    width: 72.8%;
+}
+
+.title-presentation h1{
+    margin: 0;
+    position: relative;
+    transform: translateY(-63%);
+    background: linear-gradient(to bottom, var(--secondary-color) 40%, var(--main-color) 80%);
+    -webkit-background-clip: text; /* Applique l’arrière-plan uniquement au texte */
+    -webkit-text-fill-color: transparent; /* Rend le texte transparent pour laisser apparaître le dégradé */
+}
+
+.text-presentation p{
+    color: var(--tertiary-color);
+    font-size: 1.3rem;
+    font-family: Gobold, sans-serif;
+    text-align: justify;
+}
+
+.image-presentation {
+    position: relative; /* Permet de positionner l'image et son arrière-plan */
+    width: 37%;
+    margin-left: 8%;
+}
+
+.image-presentation::before {
+    content: '';
+    position: absolute;
+    bottom: 25px; /* Ajuste le décalage vertical */
+    right: 25px; /* Ajuste le décalage horizontal */
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color);
+    z-index: 0; /* Place le fond derrière l'image */
+}
+
+.image-presentation img {
+    position: relative; /* Positionne l'image au-dessus de l'arrière-plan */
+    width: 100%;
+    z-index: 1; /* Place l'image devant */
+}

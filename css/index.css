@@ -1,0 +1,591 @@
+:root {
+    --main-color: #0B1320;
+    --secondary-color: #E7C639;
+    --tertiary-color: #FFF;
+}
+
+html, body{
+    margin: 0;
+    background-color: var(--main-color);
+}
+
+.container_index{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 7%;
+}
+
+.name{
+    display: flex;
+    flex-direction: column;
+    color: var(--tertiary-color);
+    font-size: 3.3rem;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    margin-left: 2%;
+    margin-top: 5.5%;
+    z-index: 5;
+}
+
+.name h1 {
+    line-height: 1.15; /* Ajustez la valeur selon vos besoins */
+}
+
+
+.name #first-name {
+    font-family: Gobold, sans-serif;
+    margin: 0;
+}
+
+.name #last-name {
+    font-family: Gobold Hollow, sans-serif;
+    margin: 0;
+}
+
+.rectangle {
+    position: relative;
+    width: 16%;
+    height: 16rem;
+    background: var(--secondary-color);
+    margin-top: 5%;
+}
+
+.line-horizontal {
+    position: absolute;
+    bottom: 37%;
+    left: 0;
+    width: 95%;
+    height: 3px;
+    background: var(--secondary-color);
+}
+
+.line-diagonal {
+    position: absolute;
+    top: 25%;
+    left: 0;
+    width: 55%;
+    height: 2px;
+    background: var(--secondary-color);
+    transform: rotate(55deg);
+    transform-origin: top left;
+}
+
+.container_index img{
+    width: 35%;
+    height: auto;
+    padding-right: 2%;
+    z-index: 5;
+}
+
+.menu-index{
+    background: var(--secondary-color);
+    padding-top: 7%;
+    padding-bottom: 7%;
+}
+
+.choice-index{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 85%;
+    font-size: 2rem;
+    background: var(--tertiary-color);
+    font-family: Gobold CUTS, sans-serif;
+    color: var(--main-color);
+    cursor: pointer;
+}
+
+.choice-competences{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.choice-cv{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.selected {
+    background: var(--main-color);
+    color: var(--tertiary-color);
+    transition: all 0.3s ease;
+}
+
+.container_competence{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+    padding-top: 7%;
+    padding-bottom: 7%;
+    gap: 7rem;
+    position: relative;
+}
+
+.competence{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.9);
+    width: 90%;
+    border-radius: 20px;
+    padding: 2% 0;
+    position: relative;
+}
+
+.languange{
+    width: 13%;
+    height: auto;
+}
+
+.text-arrow {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: center;
+    font-family: Gobold Extra1, sans-serif;
+    color: var(--secondary-color);
+    font-size: 2.4rem;
+    cursor: pointer;
+    width: 18%;
+    margin-top: 2.5%;
+    margin-left: 1.5%;
+}
+
+.icon {
+    width: 13%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.text-arrow:hover .icon {
+    transform: translateX(0.5rem);
+}
+
+.number{
+    right: 1%;
+    font-size: 10rem;
+    color: var(--secondary-color);
+    font-family: Gobold Hollow, sans-serif;
+    margin-top: 20%;
+    position: absolute;
+}
+
+.multiple-languages{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden-content {
+    display: none;
+}
+
+.visible-content {
+    display: block; /* Contenu visible après interaction */
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    position: relative;
+}
+
+.detail-language-logo{
+    width: 25%;
+    max-width: 50rem;
+    padding-bottom: 8%;
+}
+
+.project-image {
+    position: relative; /* Nécessaire pour positionner les éléments absolus à l'intérieur */
+    width: 75%; /* ou la largeur souhaitée */
+    max-width: 55rem;
+    border-radius: 15px; /* arrondi des coins */
+    overflow: hidden; /* empêche le débordement */
+    display: flex; /* centre le contenu */
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* ou une couleur si nécessaire */
+}
+
+.project-image img:first-child {
+    width: 100%; /* adapte l'image à la largeur du conteneur */
+    object-fit: cover; /* s'assure que l'image remplit le conteneur sans distorsion */
+    border-radius: 15px; /* même arrondi que le conteneur */
+}
+
+.project-image img:last-child {
+    position: absolute; /* Pour positionner dans le coin supérieur droit */
+    top: 30px; /* Ajustez la valeur selon vos besoins */
+    right: 30px; /* Ajustez la valeur selon vos besoins */
+    width: 8%; /* Ajustez la taille selon vos besoins */
+    height: auto; /* Conserver le ratio */
+    object-fit: contain; /* Empêche la distorsion */
+}
+
+.number-details {
+    position: absolute;
+    bottom: -7%; /* Ajustez la distance pour éloigner davantage du bord inférieur */
+    right: 10px; /* Ajustez la distance depuis le bord droit */
+    font-size: 8rem; /* Réduisez la taille si nécessaire */
+    color: var(--secondary-color);
+    font-family: Gobold Hollow, sans-serif;
+    display: none;
+}
+
+.number-details.visible-content {
+    display: block; /* Visible lorsqu'on ajoute la classe */
+}
+
+.info-project{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 75%;
+    margin-top: 4%;
+    padding-left: 15%;
+}
+
+.container-additional-infos{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    column-gap: 5%;
+    width: 100%;
+    margin-left: 15%;
+    padding-right: 10%;
+}
+
+.additional-info{
+    background-color: var(--main-color);
+    border-radius: 50px;
+    border: 2px solid var(--secondary-color);
+    font-family: Gobold Extra2, sans-serif;
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+    margin: 0;
+    height: 1%;
+    padding: 1% 8%;
+}
+
+
+
+.additional-info p{
+    margin: 0;
+}
+
+.project-logo{
+    position: relative; /* Nécessaire pour positionner les éléments absolus à l'intérieur */
+    width: 25%; /* ou la largeur souhaitée */
+    height: auto;
+    border-radius: 15px; /* arrondi des coins */
+    overflow: hidden; /* empêche le débordement */
+    display: flex; /* centre le contenu */
+    justify-content: center;
+    align-items: center;
+    background-color: transparent; /* ou une couleur si nécessaire */
+}
+
+.project-logo img:first-child {
+    width: 100%; /* adapte l'image à la largeur du conteneur */
+    object-fit: cover; /* s'assure que l'image remplit le conteneur sans distorsion */
+    border-radius: 15px; /* même arrondi que le conteneur */
+}
+
+body.modal-open {
+    overflow: hidden; /* Empêche le défilement de la page */
+    pointer-events: none; /* Bloque les interactions avec les éléments */
+}
+
+/* Styles pour le modal */
+.modal {
+    display: none; /* Masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fond semi-transparent */
+    z-index: 1000; /* Par-dessus tout le contenu */
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.carousel-buttons {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.carousel-buttons button {
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.carousel-buttons button:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.description-project {
+    display: none;
+}
+
+.description-project.visible-content {
+    display: block;
+    width: 75%;
+    color: var(--tertiary-color);
+    font-family: Gobold, sans-serif;
+    font-size: 1.3rem;
+    margin-top: 3%;
+}
+
+.description-project img{
+    width: 10%;
+}
+
+#back{
+    top: 30px;
+    left: 30px;
+    position: absolute;
+}
+
+.offset-left{
+    padding-left: 7rem;
+}
+
+.hide-cv{
+    display: none !important;
+}
+
+.container-cv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.sections {
+    display: flex;
+    background-color: var(--main-color);
+    padding: 2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10%;
+    row-gap: 5rem;
+    column-gap: 16%;
+    padding-left: 5%;
+    width: 90%;
+}
+
+
+.language{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligner le texte à gauche */
+    justify-content: center; /* Espacement entre les éléments */
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.language p {
+    color: var(--tertiary-color);
+    font-size: 1.3rem;
+    text-align: left; /* Aligner le texte à gauche */
+    font-family: Gobold, sans-serif;
+    margin: 0 0 0 16%; /* Réduction de l'espacement en bas */
+}
+
+.titre-cv {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    color: white;
+    align-items: center;
+}
+
+.titre-cv h1 {
+    text-decoration: underline var(--secondary-color);
+    font-family: Gobold, sans-serif;
+    font-size: 2.5rem;
+}
+
+.point-cv {
+    width: 2.3rem;
+    height: 3.5rem;
+    background-color: var(--secondary-color);
+}
+
+.exp{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligner le texte à gauche */
+    justify-content: center; /* Espacement entre les éléments */
+    width: 100%;
+}
+
+.exp p{
+    color: var(--tertiary-color);
+    font-size: 1.3rem;
+    text-align: left; /* Aligner le texte à gauche */
+    font-family: Gobold, sans-serif;
+    margin: 0;
+    margin-left: 22%;
+    width: 100%;
+}
+
+.hobbies{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.hobbie{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    color: var(--tertiary-color);
+    font-family: Gobold, sans-serif;
+    gap: 1rem;
+    margin: 0 0 0 20%;
+}
+
+.hobbie p{
+    border-left: 3px solid var(--tertiary-color);
+    padding-left: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    font-size: 1.2rem;
+    width: 50%;
+}
+
+.hobbie img{
+    width: 15%;
+    height: 15%;
+}
+
+.languages{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligner le texte à gauche */
+    justify-content: center; /* Espacement entre les éléments */
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.languages p {
+    color: var(--tertiary-color);
+    font-size: 1.3rem;
+    text-align: left; /* Aligner le texte à gauche */
+    font-family: Gobold, sans-serif;
+    margin: 0 0 0 27%; /* Réduction de l'espacement en bas */
+}
+
+.offset-left-formation{
+    padding-left: 10%;
+    width: 40%;
+}
+
+.formations-details{
+    color: var(--tertiary-color);
+    font-size: 1.3rem;
+    width: 100%;
+}
+
+.formations-details p{
+    margin: 0 10%;
+    font-family: Gobold, sans-serif;
+}
+
+.highlight-text{
+    color: #E7C639;
+}
+
+.download-cv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+}
+
+.download-cv a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--secondary-color);
+    color: black;
+    width: 40%;
+    height: 7rem;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 2.7rem;
+    font-family: Gobold, sans-serif;
+    box-shadow: inset 0px 7px 18px rgba(0, 0, 0, 0.8);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.download-cv a:hover{
+    transform: scale(1.05); /* Effet de zoom au survol */
+    box-shadow: inset 0px 10px 25px rgba(0, 0, 0, 0.9);
+}
+
+
+
+
+
+

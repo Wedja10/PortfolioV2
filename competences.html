@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio - Compétences</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="icon" type="image/png" href="assets/logo_web.png" sizes="32x32">
+    <style>
+        :root {
+            --main-color: #0B1320;
+            --secondary-color: #E7C639;
+            --tertiary-color: #FFF;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--main-color);
+            font-family: 'Gobold CUTS', sans-serif;
+            color: var(--tertiary-color);
+        }
+
+        .container-competences {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 7%; /* Ajoute un espace en haut pour éviter que le contenu passe sous le header */
+        }
+
+        .competences-title {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .competences-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        /* Le reste du CSS reste inchangé */
+
+        .competences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .competence-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(231, 198, 57, 0.3);
+            padding: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .competence-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--secondary-color);
+        }
+
+        .competence-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .competence-card:hover::before {
+            width: 10px;
+        }
+
+        .competence-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .competence-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+        }
+
+        .competence-subtitle {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .competence-detail {
+            display: none;
+            opacity: 0;
+            padding: 30px;
+            margin-bottom: 50px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            border-left: 5px solid var(--secondary-color);
+            transition: all 0.5s ease;
+        }
+
+        .competence-detail.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .detail-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .detail-number {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .detail-title {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+        }
+
+        .detail-content {
+            margin-bottom: 30px;
+        }
+
+        .detail-content h3 {
+            color: var(--secondary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .detail-content h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+        }
+
+        .project-related {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(231, 198, 57, 0.3);
+        }
+
+        .project-card {
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .project-title {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .self-evaluation {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(231, 198, 57, 0.1);
+            border-radius: 5px;
+        }
+
+        .self-evaluation h4 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: var(--main-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #d4b633;
+            transform: translateY(-2px);
+        }
+
+        .competence-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="index.html">ACCUEIL</a></li>
+            <li><a href="presentation.html">PRÉSENTATION</a></li>
+            <li><a href="competences.html">COMPÉTENCES</a></li>
+            <li><a href="#">CONTACT</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container-competences">
+    <h1 class="competences-title">Compétences</h1>
+
+    <div class="competences-grid">
+        <div class="competence-card" data-comp="comp1">
+            <div class="competence-number">01</div>
+            <img src="assets/competences/dev.png" alt="Développement" class="competence-icon">
+            <h2 class="competence-title">Réaliser</h2>
+            <p class="competence-subtitle">Développement d'applications informatiques</p>
+        </div>
+
+        <div class="competence-card" data-comp="comp2">
+            <div class="competence-number">02</div>
+            <img src="assets/competences/optim.png" alt="Optimisation" class="competence-icon">
+            <h2 class="competence-title">Optimiser</h2>
+            <p class="competence-subtitle">Performance des applications</p>
+        </div>
+
+        <div class="competence-card" data-comp="comp3">
+            <div class="competence-number">03</div>
+            <img src="assets/competences/admin.png" alt="Administration" class="competence-icon">
+            <h2 class="competence-title">Administrer</h2>
+            <p class="competence-subtitle">Systèmes informatiques communicants</p>
+        </div>
+
+        <div class="competence-card" data-comp="comp4">
+            <div class="competence-number">04</div>
+            <img src="assets/competences/data.png" alt="Données" class="competence-icon">
+            <h2 class="competence-title">Gérer</h2>
+            <p class="competence-subtitle">Données de l'information</p>
+        </div>
+
+        <div class="competence-card" data-comp="comp5">
+            <div class="competence-number">05</div>
+            <img src="assets/competences/conduite.png" alt="Conduite de projet" class="competence-icon">
+            <h2 class="competence-title">Conduire</h2>
+            <p class="competence-subtitle">Projets informatiques</p>
+        </div>
+
+        <div class="competence-card" data-comp="comp6">
+            <div class="competence-number">06</div>
+            <img src="assets/competences/collab.png" alt="Collaborer" class="competence-icon">
+            <h2 class="competence-title">Collaborer</h2>
+            <p class="competence-subtitle">Travailler dans une équipe informatique</p>
+        </div>
+    </div>
+
+    <!-- Détails des compétences -->
+    <div id="comp1" class="competence-detail">
+        <div class="detail-header">
+            <div class="detail-title">Réaliser</div>
+            <div class="detail-number">01</div>
+        </div>
+
+        <div class="detail-content">
+            <p>La compétence "Réaliser" concerne le développement d'applications informatiques, de l'analyse des besoins
+                à l'implémentation des solutions techniques, en passant par les tests et la documentation.</p>
+
+            <h3>Connaissances acquises</h3>
+            <p>Au cours de ma deuxième année de BUT Informatique, j'ai approfondi mes compétences en développement
+                d'applications à travers plusieurs langages de programmation. J'ai appris à concevoir des algorithmes
+                efficaces, à implémenter des interfaces utilisateur intuitives et à appliquer les bonnes pratiques de
+                développement logiciel.</p>
+
+            <h3>Méthodes et outils</h3>
+            <p>J'ai appris à maîtriser plusieurs langages de programmation comme Java, Python et C, ainsi que des
+                frameworks de développement web. J'ai également intégré les méthodes de développement agile, les tests
+                unitaires et d'intégration, et l'utilisation des outils de versioning comme Git.</p>
+
+            <div class="project-related">
+                <h3>Projets associés</h3>
+
+                <div class="project-card">
+                    <h4 class="project-title">WikiRush - Jeu vidéo en React/Javascript</h4>
+                    <p class="project-desc">Développement d'un clone du jeu classique comme wikirace qui consiste à retrouver le plus rapidement possible un article wikipedia. Ce projet m'a permis d'approfondir mes connaissances en programmation notamment dans l'utilisation et la crétion d'api via node js.</p>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">Codex naturalis - Jeu vidéo en java</h4>
+                    <p class="project-desc">Ce projet ma permis d'apprendre et de m'habituer à la programmation orientée objet. Il avait pour but de coder un jeu qui reprenaît les règles du jeu de plateau Codex Naturalis.</p>
+                </div>
+            </div>
+
+            <div class="self-evaluation">
+                <h4>Auto-évaluation</h4>
+                <p><strong>Points forts :</strong> Je suis à l'aise avec la programmation orientée objet et
+                    l'organisation du code. J'ai développé une bonne capacité à résoudre des problèmes algorithmiques.
+                </p>
+                <p><strong>Points à améliorer :</strong> Je dois encore perfectionner ma maîtrise des frameworks
+                    modernes et approfondir mes connaissances en matière de sécurité applicative. La documentation de
+                    code est également un aspect sur lequel je travaille pour m'améliorer.</p>
+            </div>
+        </div>
+
+        <button class="back-button">Retour aux compétences</button>
+    </div>
+
+    <div id="comp2" class="competence-detail">
+        <div class="detail-header">
+            <div class="detail-title">Optimiser</div>
+            <div class="detail-number">02</div>
+        </div>
+
+        <div class="detail-content">
+            <p>La compétence "Optimiser" concerne l'amélioration des performances des applications, l'efficacité des
+                algorithmes et l'utilisation optimale des ressources informatiques.</p>
+
+            <h3>Connaissances acquises</h3>
+            <p>Durant ma formation, j'ai appris à identifier les goulots d'étranglement dans les applications et à
+                mettre en œuvre des techniques d'optimisation. J'ai étudié la complexité algorithmique et comment
+                choisir les structures de données les plus adaptées aux problèmes à résoudre.</p>
+
+            <h3>Méthodes et outils</h3>
+            <p>J'ai été formé à l'utilisation d'outils de profilage et d'analyse de code pour identifier les parties
+                critiques à optimiser. J'ai également appris des techniques spécifiques comme la mise en cache, la
+                parallélisation et l'optimisation des requêtes de base de données.</p>
+
+            <div class="project-related">
+                <h3>Projets associés</h3>
+
+                <div class="project-card">
+                    <h4 class="project-title">Travia - application de djikstra</h4>
+                    <p class="project-desc">Site web qui reprenait les codes de star wars afin de créer un site de réservation de vaisseaux intergalactique. ce projet ma permis d'améliorer mes compétences en termes d'algorithmie notamment en appliquant l'algorithme afin de trouver le trajet le plus rapide.</p>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">application de divers algorithme en python</h4>
+                    <p class="project-desc">pour mieux comprendre certains algorithme nous devions coder plusieurs algorithme à appliquer sur graphe comme par exemple dfs ou bfs.</p>
+                </div>
+            </div>
+
+            <div class="self-evaluation">
+                <h4>Auto-évaluation</h4>
+                <p><strong>Points forts :</strong> J'ai développé une bonne compréhension des principes d'optimisation
+                    algorithmique et je sais identifier les parties d'un code qui peuvent être améliorées.</p>
+                <p><strong>Points à améliorer :</strong> Je dois encore approfondir mes connaissances sur l'optimisation
+                    dans des environnements distribués et le tuning de performances dans des applications à grande
+                    échelle.</p>
+            </div>
+        </div>
+
+        <button class="back-button">Retour aux compétences</button>
+    </div>
+
+    <div id="comp3" class="competence-detail">
+        <div class="detail-header">
+            <div class="detail-title">Administrer</div>
+            <div class="detail-number">03</div>
+        </div>
+
+        <div class="detail-content">
+            <p>La compétence "Administrer" englobe la gestion, la configuration et la maintenance des systèmes
+                informatiques et des réseaux de communication.</p>
+
+            <h3>Connaissances acquises</h3>
+            <p>J'ai acquis des connaissances solides en administration système et réseau, notamment sur les systèmes
+                Linux et Windows Server. J'ai appris à configurer des services réseau, à gérer la sécurité des systèmes
+                et à automatiser des tâches d'administration.</p>
+
+            <h3>Méthodes et outils</h3>
+            <p>J'ai été formé à l'utilisation d'outils d'administration système comme Bash, PowerShell, ainsi qu'aux
+                concepts de virtualisation et de conteneurisation avec Docker. J'ai également travaillé avec des outils
+                de monitoring et de gestion de configuration.</p>
+
+            <div class="project-related">
+                <h3>Projets associés</h3>
+
+                <div class="project-card">
+                    <h4 class="project-title">Configuration d'un serveur dhcp</h4>
+                    <p class="project-desc">Mise en place et configuration d'un serveur dhcp sur Linux, avec mise
+                        en œuvre de règles de sécurité et de la communication entre les utilisateurs.</p>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">Configuration d'un serveur http</h4>
+                    <p class="project-desc">configuration d'un serveur http en utilisant les protocoles http et tcp tout en créant et gérant des hôtes virtuels afin d'analyser son fonctionnement.</p>
+                </div>
+            </div>
+
+            <div class="self-evaluation">
+                <h4>Auto-évaluation</h4>
+                <p><strong>Points forts :</strong> Je maîtrise bien les fondamentaux de l'administration système Linux
+                    et la configuration des services réseau essentiels.</p>
+                <p><strong>Points à améliorer :</strong> Je dois encore développer mes compétences en automatisation de
+                    l'infrastructure et en matière de cybersécurité appliquée aux systèmes d'information.</p>
+            </div>
+        </div>
+
+        <button class="back-button">Retour aux compétences</button>
+    </div>
+
+    <div id="comp4" class="competence-detail">
+        <div class="detail-header">
+            <div class="detail-title">Gérer</div>
+            <div class="detail-number">04</div>
+        </div>
+
+        <div class="detail-content">
+            <p>La compétence "Gérer" concerne la création, la manipulation et l'exploitation des données au sein des
+                systèmes d'information, qu'elles soient structurées ou non structurées.</p>
+
+            <h3>Connaissances acquises</h3>
+            <p>J'ai approfondi mes connaissances en modélisation de données, en conception de bases de données
+                relationnelles et NoSQL. J'ai également étudié les principes de la qualité des données, de l'intégrité
+                et de la sécurité des informations.</p>
+
+            <h3>Méthodes et outils</h3>
+            <p>J'ai travaillé avec plusieurs systèmes de gestion de bases de données comme MySQL et PostgreSQL, ainsi
+                qu'avec des outils d'analyse de données. J'ai pratiqué les langages SQL et PL/SQL pour la création et la
+                manipulation des données.</p>
+
+            <div class="project-related">
+                <h3>Projets associés</h3>
+
+                <div class="project-card">
+                    <h4 class="project-title">Conception d'une base de données mongodb pour une application de réservation de billet</h4>
+                    <p class="project-desc">Modélisation et implémentation d'une base de données non relationnelle complète pour gérer les billets et trajet qui seront disponibles sur le site web.</p>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">modification d'un site web via la base de donnée</h4>
+                    <p class="project-desc">utilisation d'une base de données mysql afin de pouvoir modifier dynamiquement un site web via une page administrateur. Ce site web présente le château de fontainebleau et ce projet a été fait en collaboration avec l'unesco</p>
+                </div>
+            </div>
+
+            <div class="self-evaluation">
+                <h4>Auto-évaluation</h4>
+                <p><strong>Points forts :</strong> J'ai une bonne maîtrise de la conception de schémas de bases de
+                    données et de l'écriture de requêtes SQL complexes.</p>
+                <p><strong>Points à améliorer :</strong> Je souhaite approfondir mes connaissances sur les bases de
+                    données NoSQL et les techniques avancées d'analyse de données, notamment dans le domaine du big
+                    data.</p>
+            </div>
+        </div>
+
+        <button class="back-button">Retour aux compétences</button>
+    </div>
+
+    <div id="comp5" class="competence-detail">
+        <div class="detail-header">
+            <div class="detail-title">Conduire</div>
+            <div class="detail-number">05</div>
+        </div>
+
+        <div class="detail-content">
+            <p>La compétence "Conduire" englobe la gestion de projets informatiques, de leur initiation à leur clôture,
+                en passant par la planification, l'exécution et le suivi.</p>
+
+            <h3>Connaissances acquises</h3>
+            <p>J'ai acquis des connaissances en méthodologies de gestion de projet, particulièrement les méthodes agiles
+                comme Scrum. J'ai appris à définir le périmètre d'un projet, à estimer les ressources nécessaires et à
+                gérer les risques.</p>
+
+            <h3>Méthodes et outils</h3>
+            <p>J'ai été formé à l'utilisation d'outils de gestion de projet comme Trello et Jira, ainsi qu'aux
+                techniques de planification et de suivi de projet. J'ai également appris à animer des réunions et à
+                communiquer efficacement avec les parties prenantes.</p>
+
+            <div class="project-related">
+                <h3>Projets associés</h3>
+
+                <div class="project-card">
+                    <h4 class="project-title">Projet de développement en équipe</h4>
+                    <p class="project-desc">Organisation et gestion d'un projet de développement en équipe selon la
+                        méthodologie Scrum, avec définition des user stories, planification des sprints et revues
+                        régulières.</p>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">création d'un projet personnel sur les quizz</h4>
+                    <p class="project-desc">ce site web fait en python via le framework django et react m'a permis d'approfondir mes compétences en termes de gestion d'un projet notamment parce que j'étais tout seul ce qui ma obligé à être plus autonome et organisé.</p>
+                </div>
+            </div>
+
+            <div class="self-evaluation">
+                <h4>Auto-évaluation</h4>
+                <p><strong>Points forts :</strong> Je suis rigoureux dans la planification et le suivi des tâches, et
+                    j'ai une bonne capacité à identifier les risques potentiels d'un projet.</p>
+                <p><strong>Points à améliorer :</strong> Je dois encore développer mes compétences en matière
+                    d'estimation précise des charges de travail et en gestion des conflits au sein d'une équipe.</p>
+            </div>
+        </div>
+
+        <button class="back-button">Retour aux compétences</button>
+    </div>
+
+    <div id="comp6" class="competence-detail">
+        <div class="detail-header">
+            <div class="detail-title">Collaborer</div>
+            <div class="detail-number">06</div>
+        </div>
+
+        <div class="detail-content">
+            <p>La compétence "Collaborer" concerne la capacité à travailler efficacement au sein d'une équipe
+                informatique, à communiquer avec différents acteurs et à partager des connaissances et des
+                responsabilités.</p>
+
+            <h3>Connaissances acquises</h3>
+            <p>J'ai approfondi ma compréhension des dynamiques d'équipe, des rôles au sein d'un projet informatique et
+                des techniques de communication professionnelle. J'ai également appris l'importance de la documentation
+                et du partage de connaissances.</p>
+
+            <h3>Méthodes et outils</h3>
+            <p>J'ai été formé à l'utilisation d'outils collaboratifs comme GitHub, Gitlab, et des plateformes de
+                communication d'équipe. J'ai également pratiqué les revues de code, les sessions de pair programming et
+                les réunions de rétrospective.</p>
+
+            <div class="project-related">
+                <h3>Projets associés</h3>
+
+                <div class="project-card">
+                    <h4 class="project-title">Projet collaboratif avec Git</h4>
+                    <p class="project-desc">Développement d'une application en équipe avec utilisation avancée de Git
+                        pour la gestion des branches, les pull requests et les revues de code.</p>
+                </div>
+
+                <div class="project-card">
+                    <h4 class="project-title">Documentation technique et utilisateur</h4>
+                    <p class="project-desc">Création d'une documentation complète pour une application développée en
+                        équipe, incluant des aspects techniques pour les développeurs et des guides pour les
+                        utilisateurs finaux.</p>
+                </div>
+            </div>
+
+            <div class="self-evaluation">
+                <h4>Auto-évaluation</h4>
+                <p><strong>Points forts :</strong> Je m'intègre facilement dans une équipe et je suis à l'aise avec les
+                    outils de versioning comme Git. Je communique clairement mes idées et je suis ouvert aux feedback.
+                </p>
+                <p><strong>Points à améliorer :</strong> Je dois encore travailler sur ma capacité à déléguer des tâches
+                    et à m'adapter rapidement à différents styles de travail au sein d'une équipe.</p>
+            </div>
+        </div>
+
+        <button class="back-button">Retour aux compétences</button>
+    </div>
+</div>
+
+<footer>
+    <div class="deco-footer">
+        <p>COMPÉTENCES</p>
+    </div>
+    <div class="main-footer">
+        <img id="logo" src="assets/footer/logo.png" alt="Logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">ACCUEIL</a></li>
+                <li><a href="presentation.html">PRÉSENTATION</a></li>
+                <li><a href="competences.html">COMPÉTENCES</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="footer-contact">
+            <a href="https://www.linkedin.com/in/jawed-essahli/"><img id="linkedin" src="assets/footer/linkedin.png"
+                                                                      alt="linkedin link"></a>
+            <a href="https://github.com/Wedja10"><img id="github" src="assets/footer/github.png" alt="github link"></a>
+            <div class="mail-phone">
+                <img src="assets/footer/mail.png" alt="mail">
+                <p>ESSAHLI.JAWED710@GMAIL.COM</p>
+                <img id="phone" src="assets/footer/phone.png" alt="phone number">
+                <p>07 49 26 58 89</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const competenceCards = document.querySelectorAll('.competence-card');
+        const competenceDetails = document.querySelectorAll('.competence-detail');
+        const backButtons = document.querySelectorAll('.back-button');
+        const decoFooter = document.querySelector('.deco-footer p');
+
+        // Fonction pour afficher une compétence spécifique
+        function showCompetence(compId) {
+            // Masquer toutes les sections détaillées
+            competenceDetails.forEach(detail => {
+                detail.classList.remove('active');
+            });
+
+            // Afficher la section détaillée correspondante
+            const targetDetail = document.getElementById(compId);
+            if (targetDetail) {
+                targetDetail.classList.add('active');
+
+                // Faire défiler jusqu'à la section
+                targetDetail.scrollIntoView({behavior: 'smooth'});
+
+                // Modifier le texte du footer
+                decoFooter.textContent = targetDetail.querySelector('.detail-title').textContent.toUpperCase();
+            }
+        }
+
+        // Ajouter des écouteurs d'événements aux cartes de compétence
+        competenceCards.forEach(card => {
+            card.addEventListener('click', function () {
+                const compId = this.getAttribute('data-comp');
+                showCompetence(compId);
+            });
+        });
+
+        // Ajouter des écouteurs d'événements aux boutons de retour
+        backButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                // Masquer toutes les sections détaillées
+                competenceDetails.forEach(detail => {
+                    detail.classList.remove('active');
+                });
+
+                // Faire défiler vers le haut
+                document.querySelector('.competences-grid').scrollIntoView({behavior: 'smooth'});
+
+                // Réinitialiser le texte du footer
+                decoFooter.textContent = "COMPÉTENCES";
+            });
+        });
+    });
+</script>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
